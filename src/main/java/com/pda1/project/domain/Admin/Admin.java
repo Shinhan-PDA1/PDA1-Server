@@ -1,4 +1,4 @@
-package com.pda1.project.domain.UserInformation;
+package com.pda1.project.domain.Admin;
 
 import com.pda1.project.domain.BaseTimeEntity;
 import com.pda1.project.domain.Evaluation.Evaluation;
@@ -24,28 +24,17 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Data
 @Entity
-public class UserInformation extends BaseTimeEntity {
+public class Admin extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long adminId;
 
     @Column
     private String name;
     private String email;
     private String account;
     private String password;
-
-    @OneToOne
-    @JoinColumn(name = "survey_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Survey survey;
-
-    @OneToMany(mappedBy = "userInformation", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<InterestItem> interestItems = new ArrayList<>();
-
-    @OneToMany(mappedBy = "userInformation", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<Evaluation> evaluations = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
@@ -56,4 +45,5 @@ public class UserInformation extends BaseTimeEntity {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
+
 }
