@@ -1,15 +1,14 @@
 package com.pda1.project.domain.InterestItem;
 
 import com.pda1.project.domain.BaseTimeEntity;
+import com.pda1.project.domain.UserInformation.UserInformation;
+import com.pda1.project.domain.item.Item;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Builder
 @NoArgsConstructor
@@ -20,8 +19,14 @@ public class InterestItem extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long itemId;
+    private Long interestId;
 
-    private String item;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private UserInformation userInformation;
+
+    @ManyToOne
+    @JoinColumn(name="item_id")
+    private Item item;
 
 }

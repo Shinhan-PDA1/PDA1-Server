@@ -1,15 +1,13 @@
 package com.pda1.project.domain.Evaluation;
 
 import com.pda1.project.domain.BaseTimeEntity;
+import com.pda1.project.domain.UserInformation.UserInformation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Builder
 @NoArgsConstructor
@@ -22,6 +20,10 @@ public class Evaluation extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long evaluationId;
 
+    @Column
     private double satisfaction;
 
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private UserInformation userInformation;
 }
