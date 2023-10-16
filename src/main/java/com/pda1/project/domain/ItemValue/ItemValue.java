@@ -1,7 +1,5 @@
-package com.pda1.project.domain.InterestItem;
+package com.pda1.project.domain.ItemValue;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.pda1.project.domain.BaseTimeEntity;
 import com.pda1.project.domain.UserInformation.UserInformation;
 import com.pda1.project.domain.item.Item;
 import lombok.AllArgsConstructor;
@@ -16,18 +14,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
-public class InterestItem extends BaseTimeEntity {
+public class ItemValue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long interestId;
+    private Long valueId;
 
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private UserInformation userInformation;
+    @Column
+    private String itemName;
+    private String currPrice;
+    private String changeNumber;
+    private String changeRate;
+    private String stockCode;
 
     @ManyToOne
     @JoinColumn(name="item_id")
     private Item item;
-
 }

@@ -19,10 +19,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_URI = {
-        "/v1/users/register",
-        "/v1/users/login",
-        "/v1/admins/register",
-        "/v1/admins/login"
+        "/jootopia/v1/users/register",
+        "/jootopia/v1/users/login",
+        "/jootopia/v1/users/logout",
+        "/jootopia/v1/admins/register",
+        "/jootopia/v1/admins/login",
+        "/jootopia/v1/admins/logout"
+
     };
 
     private static final String[] ADMIN_URI = {
@@ -30,7 +33,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] USER_URI = {
-//            "/v1/서비스명/user/**" 이렇게 지어서 서비스명 하위 도메인은 ROLE_USER만 접근하게 설정
+        "/jootopia/v1/users/system/**" //이렇게 지어서 서비스명 하위 도메인은 ROLE_USER만 접근하게 설정
 
     };
 
@@ -58,9 +61,9 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() // 세션 사용 X
                 .authorizeRequests() // 요청에 대한 사용 권한 체크
 //                .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // options 메소드로 호출하는 모든 접근 허용, JWT 토큰 검사가 불가능
-                .antMatchers("/v1/admins/**").hasRole("ADMIN")
-                .antMatchers("/v1/users/**").hasAnyRole("USER")
-                .antMatchers(ADMIN_URI).hasAnyRole("ADMIN")
+//                .antMatchers("/v1/admins/**").hasRole("ADMIN")
+//                .antMatchers("/jootopia/v1/users/**").hasRole("USER")
+                .antMatchers(ADMIN_URI).hasRole("ADMIN")
                 .antMatchers(USER_URI).hasRole("USER")
                 .antMatchers(HttpMethod.POST).authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint);

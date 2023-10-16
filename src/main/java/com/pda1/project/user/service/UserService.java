@@ -25,10 +25,8 @@ public class UserService {
         if (this.userInformationRepository.findByAccount(dto.getAccount()).isPresent()) {
             resultMap.put("success", false);
             resultMap.put("message", "중복된 아이디입니다.");
-
             return resultMap;
         }
-
         System.out.println(dto);
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
 
@@ -50,5 +48,9 @@ public class UserService {
         }
 
         return resultMap;
+    }
+
+    public UserInformation findUser(String account) {
+        return userInformationRepository.findByAccount(account).orElseThrow();
     }
 }

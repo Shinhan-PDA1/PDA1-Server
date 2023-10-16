@@ -1,5 +1,7 @@
 package com.pda1.project.domain.UserInformation;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pda1.project.domain.BaseTimeEntity;
 import com.pda1.project.domain.Evaluation.Evaluation;
 import com.pda1.project.domain.InterestItem.InterestItem;
@@ -36,12 +38,13 @@ public class UserInformation extends BaseTimeEntity {
     private String account;
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "survey_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Survey survey;
+//    @OneToOne
+//    @JoinColumn(name = "survey_id")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    private Survey survey;
 
     @OneToMany(mappedBy = "userInformation", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<InterestItem> interestItems = new ArrayList<>();
 
     @OneToMany(mappedBy = "userInformation", orphanRemoval = true, cascade = CascadeType.ALL)
