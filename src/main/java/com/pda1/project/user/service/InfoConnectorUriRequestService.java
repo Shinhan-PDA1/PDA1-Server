@@ -60,4 +60,16 @@ public class InfoConnectorUriRequestService {
 
         return new RestTemplate().exchange(uri, HttpMethod.GET, httpEntity, MainGuideResponse.class).getBody();
     }
+
+    public String getStockCode(String query) {
+
+        URI uri = uriBuilderService.buildStockCodeUri(query);
+
+        HttpHeaders headers = new HttpHeaders();
+
+        HttpEntity httpEntity = new HttpEntity<>(headers);
+
+        return new RestTemplate().exchange(uri, HttpMethod.GET, httpEntity, String.class).getBody();
+
+    }
 }

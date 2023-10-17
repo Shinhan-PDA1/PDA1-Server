@@ -56,5 +56,13 @@ public class UserSystemController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<?> getStockCode(@RequestParam String query) {
+        String code = userSystemService.getStockCode(query);
+        return ResponseEntity.ok(code);
+    }
+
+
+
 
 }
