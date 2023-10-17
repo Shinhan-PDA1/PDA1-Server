@@ -9,6 +9,7 @@ import com.pda1.project.domain.UserInformation.UserInformationRepository;
 import com.pda1.project.domain.item.ItemRepository;
 import com.pda1.project.domain.survey.Survey;
 import com.pda1.project.domain.survey.SurveyRepository;
+import com.pda1.project.user.controller.Response.guide.MainGuideResponse;
 import com.pda1.project.user.controller.Response.main.InterestList;
 import com.pda1.project.user.controller.Response.chatbot.MainChatbotResponse;
 import com.pda1.project.user.controller.Response.detail.MainDetailResponse;
@@ -129,4 +130,12 @@ public class UserSystemService {
         return response;
     }
 
+    public MainGuideResponse getGuideInformation(String account) {
+
+        UserInformation user = userInformationRepository.findByAccount(account).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 유저입니다."));
+
+        MainGuideResponse response = infoConnectorUriRequestService.getGuideInformation(user.getUserId());
+
+        return response;
+    }
 }

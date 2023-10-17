@@ -13,10 +13,7 @@ import java.net.URI;
 public class InfoConnectorUriBuilderService {
     private static final String DETAIL_INFO_URL =  "http://localhost:8080/api/v1/zootopia/detail";
     private static final String CHATBOT_URL =  "http://localhost:8080/api/v1/openai/chatbot";
-    private static final String ISSUE_URL =  "https://gapi.shinhaninvest.com:8443/openapi/v1.0/ranking/issue";
-    private static final String STRATEGY_URL =  "https://gapi.shinhaninvest.com:8443/openapi/v1.0/strategy/invest";
-    private static final String MARKET_ISSUE_URL =  "https://gapi.shinhaninvest.com:8443/openapi/v1.0/strategy/market-issue";
-
+    private static final String GUIDE_URL =  "http://localhost:8080/api/v1/zootopia/guide";
 
 
     public URI buildDetailUri(String stockCode) {
@@ -30,6 +27,15 @@ public class InfoConnectorUriBuilderService {
 
     public URI buildChatbotUri() {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(CHATBOT_URL);
+
+        URI uri =uriBuilder.build().encode().toUri();
+
+        return uri;
+    }
+
+    public URI buildGuideUri(Long userId) {
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(GUIDE_URL);
+        uriBuilder.queryParam("userId", userId);
 
         URI uri =uriBuilder.build().encode().toUri();
 

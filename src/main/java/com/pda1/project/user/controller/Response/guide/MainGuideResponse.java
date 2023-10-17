@@ -1,14 +1,13 @@
 package com.pda1.project.user.controller.Response.guide;
 
-import com.pda1.project.user.controller.Response.main.InterestList;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pda1.project.user.service.dto.GuideDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Getter
 @Builder
@@ -16,5 +15,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class MainGuideResponse {
 
-    private Map<String,String> result;
+    @JsonProperty("response")
+    private List<GuideDTO> response;
 }
