@@ -6,20 +6,17 @@ import com.pda1.project.domain.ItemValue.ItemValue;
 import com.pda1.project.domain.ItemValue.ItemValueRepository;
 import com.pda1.project.domain.UserInformation.UserInformation;
 import com.pda1.project.domain.UserInformation.UserInformationRepository;
-import com.pda1.project.domain.item.Item;
 import com.pda1.project.domain.item.ItemRepository;
 import com.pda1.project.domain.survey.Survey;
 import com.pda1.project.domain.survey.SurveyRepository;
-import com.pda1.project.user.controller.Response.InterestList;
-import com.pda1.project.user.controller.Response.MainChatbotResponse;
-import com.pda1.project.user.controller.Response.MainDetailResponse;
-import com.pda1.project.user.controller.Response.MainInterestResponse;
+import com.pda1.project.user.controller.Response.main.InterestList;
+import com.pda1.project.user.controller.Response.chatbot.MainChatbotResponse;
+import com.pda1.project.user.controller.Response.detail.MainDetailResponse;
+import com.pda1.project.user.controller.Response.main.MainInterestResponse;
 import com.pda1.project.user.service.dto.ChatbotRequestDTO;
 import com.pda1.project.user.service.dto.ItemDTO;
 import com.pda1.project.user.service.dto.UserFilterDTO;
-import com.pda1.project.user.service.dto.UserRegisterDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -127,8 +124,9 @@ public class UserSystemService {
     public MainChatbotResponse saveConversationAndGetAnswer(ChatbotRequestDTO data, String account) {
 
         UserInformation user = userInformationRepository.findByAccount(account).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 유저입니다."));
-        System.out.println("!!!!!!!!!!!! : " + user.getAccount());
         MainChatbotResponse response = infoConnectorUriRequestService.saveConversationAndGetAnswer(data, user.getUserId());
+
         return response;
     }
+
 }

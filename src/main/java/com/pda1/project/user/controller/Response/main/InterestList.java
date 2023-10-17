@@ -1,4 +1,4 @@
-package com.pda1.project.user.controller.Response;
+package com.pda1.project.user.controller.Response.main;
 
 import com.pda1.project.user.service.dto.ItemDTO;
 import lombok.Builder;

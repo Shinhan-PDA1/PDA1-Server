@@ -1,10 +1,9 @@
 package com.pda1.project.user.service;
 
 
-import com.pda1.project.user.controller.Response.MainChatbotResponse;
-import com.pda1.project.user.controller.Response.MainDetailResponse;
+import com.pda1.project.user.controller.Response.chatbot.MainChatbotResponse;
+import com.pda1.project.user.controller.Response.detail.MainDetailResponse;
 import com.pda1.project.user.service.dto.ChatbotRequestDTO;
-import com.pda1.project.user.service.dto.UserFilterDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
