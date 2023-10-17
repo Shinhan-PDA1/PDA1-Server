@@ -45,7 +45,7 @@ public class UserManageController {
     @ApiOperation(value = "회원가입")
     public ResponseEntity<Map<String, Object>> createUser(@RequestBody UserRegisterRequest request) {
         Map<String, Object> result = this.userService.create(request.toServiceDto());
-
+        System.out.println("@@@@@@@@@@@@@@@");
         if ((Boolean) result.get("success")) {
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {

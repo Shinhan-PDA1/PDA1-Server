@@ -46,7 +46,7 @@ public class InfoConnectorUriRequestService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity httpEntity = new HttpEntity<>(jsonRequest, headers);
-
+        System.out.println(uri);
         return new RestTemplate().exchange(uri, HttpMethod.POST, httpEntity, MainChatbotResponse.class).getBody();
 
     }
