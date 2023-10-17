@@ -1,4 +1,4 @@
-package com.pda1.project.user.controller.Response;
+package com.pda1.project.user.controller.Response.detail;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -17,6 +17,9 @@ public class ChartTableResponse {
 
     @JsonProperty("annual_low")
     private String annual_low;
+
+    @JsonProperty("stock_market")
+    private String stock_market;
 
     @JsonProperty("capital")
     private String capital;

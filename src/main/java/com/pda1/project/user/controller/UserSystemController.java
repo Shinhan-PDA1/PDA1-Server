@@ -1,19 +1,20 @@
 package com.pda1.project.user.controller;
 
-import com.pda1.project.user.controller.Response.MainDetailResponse;
-import com.pda1.project.user.controller.Response.MainInterestResponse;
+import com.pda1.project.user.controller.Response.chatbot.MainChatbotResponse;
+import com.pda1.project.user.controller.Response.detail.MainDetailResponse;
+import com.pda1.project.user.controller.Response.guide.MainGuideResponse;
+import com.pda1.project.user.controller.Response.main.*;
+import com.pda1.project.user.controller.request.ChatbotRequest;
 import com.pda1.project.user.controller.request.UserFilterRequest;
-import com.pda1.project.user.controller.request.UserRegisterRequest;
+import com.pda1.project.user.service.UserShinhanApiService;
 import com.pda1.project.user.service.UserSystemService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,7 +26,6 @@ public class UserSystemController {
     @PostMapping("/filter")
     @ApiOperation(value = "설문조사")
     public ResponseEntity<?> saveFilter(@RequestBody UserFilterRequest request, Principal principal) {
-        System.out.println("@@@ : " + principal.getName());
         userSystemService.saveFilterInfo(request.toServiceDto(), principal.getName());
 
         return ResponseEntity.ok("저장되었습니다.");
@@ -43,5 +43,18 @@ public class UserSystemController {
         MainDetailResponse response = userSystemService.getDetailInformation(stockCode);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/chatbot")
+    public ResponseEntity<?> saveConversationAndGetAnswer(@RequestBody ChatbotRequest request, Principal principal) {
+        MainChatbotResponse response = userSystemService.saveConversationAndGetAnswer(request.toServiceDto(), principal.getName());
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/guide")
+    public ResponseEntity<?> getGuideInformation(Principal principal) {
+        MainGuideResponse response = userSystemService.getGuideInformation(principal.getName());
+        return ResponseEntity.ok(response);
+    }
+
 
 }

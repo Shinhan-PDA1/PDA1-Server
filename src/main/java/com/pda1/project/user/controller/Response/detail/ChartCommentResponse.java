@@ -1,4 +1,4 @@
-package com.pda1.project.user.controller.Response;
+package com.pda1.project.user.controller.Response.detail;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class ChartCommentResponse {
 
-    @JsonProperty("chart_comment")
-    private String chart_comment;
+    @JsonProperty("chart_long_comment")
+    private String chart_long_comment;
+
+    @JsonProperty("chart_short_comment")
+    private String chart_short_comment;
 }

@@ -1,4 +1,4 @@
-package com.pda1.project.user.controller.Response;
+package com.pda1.project.user.controller.Response.chatbot;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -6,13 +6,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Getter
 @Builder
 @AllArgsConstructor
-public class StatementCommentResponse {
+@RequiredArgsConstructor
+public class MainChatbotResponse {
 
-    @JsonProperty("statement_comment")
-    private String statement_comment;
+    @JsonProperty("response")
+    private String response;
 
 }

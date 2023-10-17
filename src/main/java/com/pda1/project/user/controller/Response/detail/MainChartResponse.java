@@ -1,10 +1,10 @@
-package com.pda1.project.user.controller.Response;
+package com.pda1.project.user.controller.Response.detail;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pda1.project.user.controller.Response.detail.ChartData;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
