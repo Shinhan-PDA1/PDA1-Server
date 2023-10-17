@@ -12,7 +12,10 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 public class StatementCommentResponse {
 
-    @JsonProperty("statement_comment")
-    private String statement_comment;
+    @JsonProperty("statement_long_comment")
+    private String statement_long_comment;
+
+    @JsonProperty("statement_short_comment")
+    private String statement_short_comment;
 
 }

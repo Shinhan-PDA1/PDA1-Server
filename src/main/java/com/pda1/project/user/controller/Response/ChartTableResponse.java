@@ -18,6 +18,9 @@ public class ChartTableResponse {
     @JsonProperty("annual_low")
     private String annual_low;
 
+    @JsonProperty("stock_market")
+    private String stock_market;
+
     @JsonProperty("capital")
     private String capital;
 
