@@ -1,7 +1,9 @@
 package com.pda1.project.user.controller;
 
+import com.pda1.project.user.controller.Response.MainChatbotResponse;
 import com.pda1.project.user.controller.Response.MainDetailResponse;
 import com.pda1.project.user.controller.Response.MainInterestResponse;
+import com.pda1.project.user.controller.request.ChatbotRequest;
 import com.pda1.project.user.controller.request.UserFilterRequest;
 import com.pda1.project.user.controller.request.UserRegisterRequest;
 import com.pda1.project.user.service.UserSystemService;
@@ -41,6 +43,13 @@ public class UserSystemController {
     @GetMapping("/detail")
     public ResponseEntity<?> getDetailInformation(@RequestParam String stockCode) {
         MainDetailResponse response = userSystemService.getDetailInformation(stockCode);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/chatbot")
+    public ResponseEntity<?> saveConversationAndGetAnswer(@RequestBody ChatbotRequest request, Principal principal) {
+        System.out.println("@@@@@@@@@@@!!");
+        MainChatbotResponse response = userSystemService.saveConversationAndGetAnswer(request.toServiceDto(), principal.getName());
         return ResponseEntity.ok(response);
     }
 

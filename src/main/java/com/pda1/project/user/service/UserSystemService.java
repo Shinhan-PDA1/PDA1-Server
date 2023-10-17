@@ -11,8 +11,10 @@ import com.pda1.project.domain.item.ItemRepository;
 import com.pda1.project.domain.survey.Survey;
 import com.pda1.project.domain.survey.SurveyRepository;
 import com.pda1.project.user.controller.Response.InterestList;
+import com.pda1.project.user.controller.Response.MainChatbotResponse;
 import com.pda1.project.user.controller.Response.MainDetailResponse;
 import com.pda1.project.user.controller.Response.MainInterestResponse;
+import com.pda1.project.user.service.dto.ChatbotRequestDTO;
 import com.pda1.project.user.service.dto.ItemDTO;
 import com.pda1.project.user.service.dto.UserFilterDTO;
 import com.pda1.project.user.service.dto.UserRegisterDTO;
@@ -119,6 +121,14 @@ public class UserSystemService {
 
         MainDetailResponse response = infoConnectorUriRequestService.getDetailInformation(stockCode);
 
+        return response;
+    }
+
+    public MainChatbotResponse saveConversationAndGetAnswer(ChatbotRequestDTO data, String account) {
+
+        UserInformation user = userInformationRepository.findByAccount(account).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 유저입니다."));
+        System.out.println("!!!!!!!!!!!! : " + user.getAccount());
+        MainChatbotResponse response = infoConnectorUriRequestService.saveConversationAndGetAnswer(data, user.getUserId());
         return response;
     }
 }
