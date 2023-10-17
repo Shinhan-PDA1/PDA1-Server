@@ -57,7 +57,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() // 세션 사용 X
                 .authorizeRequests() // 요청에 대한 사용 권한 체크
 //                .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll() // options 메소드로 호출하는 모든 접근 허용, JWT 토큰 검사가 불가능

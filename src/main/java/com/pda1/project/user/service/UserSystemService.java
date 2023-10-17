@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RequiredArgsConstructor
 @Service
@@ -137,5 +139,22 @@ public class UserSystemService {
         MainGuideResponse response = infoConnectorUriRequestService.getGuideInformation(user.getUserId());
 
         return response;
+    }
+
+    public String getStockCode(String query) {
+
+        String pattern = "\\d{6}"; // 여섯 자리 숫자에 대한 정규 표현식
+        Pattern regexPattern = Pattern.compile(pattern);
+        Matcher matcher = regexPattern.matcher(query);
+
+        if (matcher.matches()) {
+            // 입력 문자열이 여섯 자리 숫자인 경우 종목 코드로 분류
+            return query;
+        }
+        else {
+            // 그 외의 경우 종목명 으로 분류
+            return infoConnectorUriRequestService.getStockCode(query);
+        }
+
     }
 }

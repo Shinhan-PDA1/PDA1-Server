@@ -14,6 +14,7 @@ public class InfoConnectorUriBuilderService {
     private static final String DETAIL_INFO_URL =  "http://localhost:8080/api/v1/zootopia/detail";
     private static final String CHATBOT_URL =  "http://localhost:8080/api/v1/openai/chatbot";
     private static final String GUIDE_URL =  "http://localhost:8080/api/v1/zootopia/guide";
+    private static final String STOCK_CODE_URL =  "http://localhost:8080/api/v1/zootopia/search";
 
 
     public URI buildDetailUri(String stockCode) {
@@ -36,6 +37,15 @@ public class InfoConnectorUriBuilderService {
     public URI buildGuideUri(Long userId) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(GUIDE_URL);
         uriBuilder.queryParam("userId", userId);
+
+        URI uri =uriBuilder.build().encode().toUri();
+
+        return uri;
+    }
+
+    public URI buildStockCodeUri(String query) {
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(STOCK_CODE_URL);
+        uriBuilder.queryParam("stockName", query);
 
         URI uri =uriBuilder.build().encode().toUri();
 
