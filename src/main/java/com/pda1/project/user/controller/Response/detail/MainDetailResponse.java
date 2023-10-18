@@ -18,8 +18,8 @@ public class MainDetailResponse {
     @JsonProperty("chartCommentResponse")
     private ChartCommentResponse chartCommentResponse;
 
-//    @JsonProperty("statementResponse")
-//    private StatementResponse statementResponse;
+    @JsonProperty("stockInfoResponse")
+    private StockInfoResponse stockInfoResponse;
 
     @JsonProperty("statementCommentResponse")
     private StatementCommentResponse statementCommentResponse;
