@@ -44,7 +44,7 @@ public class UserSystemController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/chatbot")
+    @PostMapping("/chatbot")
     public ResponseEntity<?> saveConversationAndGetAnswer(@RequestBody ChatbotRequest request, Principal principal) {
         MainChatbotResponse response = userSystemService.saveConversationAndGetAnswer(request.toServiceDto(), principal.getName());
         return ResponseEntity.ok(response);
