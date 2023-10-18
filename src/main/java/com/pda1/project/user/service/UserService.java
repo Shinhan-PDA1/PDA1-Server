@@ -1,7 +1,10 @@
 package com.pda1.project.user.service;
 
+import com.pda1.project.domain.InterestItem.InterestItem;
+import com.pda1.project.domain.InterestItem.InterestItemRepository;
 import com.pda1.project.domain.UserInformation.UserInformation;
 import com.pda1.project.domain.UserInformation.UserInformationRepository;
+import com.pda1.project.domain.survey.Survey;
 import com.pda1.project.domain.survey.SurveyRepository;
 import com.pda1.project.user.service.dto.UserRegisterDTO;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -19,6 +23,7 @@ public class UserService {
     private final UserInformationRepository userInformationRepository;
     private final PasswordEncoder passwordEncoder;
     private final SurveyRepository surveyRepository;
+    private final InterestItemRepository interestItemRepository;
 
     public Map<String, Object> create(UserRegisterDTO dto) {
         Map<String, Object> resultMap = new HashMap<>();
@@ -60,6 +65,19 @@ public class UserService {
 
         if(surveyRepository.findByUserInformation(user).isPresent()) return true;
         else return false;
+
+    }
+
+    public String getType(UserInformation user) {
+
+        Survey survey = surveyRepository.findByUserInformation(user).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 설문입니다."));
+
+        return survey.getInvestPeriod();
+    }
+
+    public List<InterestItem> getInterestItem(UserInformation foundUser) {
+
+        return interestItemRepository.findAllByUserInformation(foundUser);
 
     }
 }

@@ -24,9 +24,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
         "/jootopia/v1/users/logout",
         "/jootopia/v1/admins/register",
         "/jootopia/v1/admins/login",
-        "/jootopia/v1/admins/logout",
         "/jootopia/v1/users/system/interest"
-
     };
 
     private static final String[] ADMIN_URI = {

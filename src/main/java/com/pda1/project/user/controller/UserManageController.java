@@ -1,8 +1,10 @@
 package com.pda1.project.user.controller;
 
+import com.pda1.project.domain.InterestItem.InterestItem;
 import com.pda1.project.domain.UserInformation.UserInformation;
 import com.pda1.project.domain.UserInformation.UserInformationRepository;
 import com.pda1.project.user.controller.Response.AuthenticationResponse;
+import com.pda1.project.user.controller.Response.Interest;
 import com.pda1.project.user.controller.request.AuthenticationRequest;
 import com.pda1.project.user.controller.request.UserRegisterRequest;
 import com.pda1.project.user.service.UserInformationDetailService;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -59,13 +62,7 @@ public class UserManageController {
             @RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
         String account = authenticationRequest.getAccount();
-//        UserInformation foundUser = userInformationRepository.findByAccount(account).orElseThrow();
         UserInformation foundUser = userService.findUser(account);
-//        System.out.println("----------");
-//        System.out.println(foundUser.getAuthorities());
-//        System.out.println(foundUser.getRoles());
-//        System.out.println(foundUser.getAccount());
-//        System.out.println("----------");
 
         if (!passwordEncoder.matches(authenticationRequest.getPassword(), foundUser.getPassword())) {
             return ResponseEntity.ok("Password invalid");
@@ -76,9 +73,11 @@ public class UserManageController {
         final String token = jwtUtils.createToken(userDetails.getUsername(), foundUser.getRoles());
         final UserInformation user = userInformationDetailService.getUserInformation(account);
 
-        Boolean isSurvey = userService.validSurvey(foundUser);
+        String type = userService.getType(foundUser);
+        List<InterestItem> items = userService.getInterestItem(foundUser);
+        Interest interest = Interest.builder().item1(items.get(0).getItem().getTheme()).item2(items.get(1).getItem().getTheme()).item3(items.get(2).getItem().getTheme()).build();
 
-        return ResponseEntity.ok(new AuthenticationResponse(token, isSurvey, user));
+        return ResponseEntity.ok(new AuthenticationResponse(token, type, interest, user));
     }
 
     @PostMapping("/logout")

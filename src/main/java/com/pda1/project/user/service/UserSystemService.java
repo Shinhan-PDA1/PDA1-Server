@@ -19,6 +19,7 @@ import com.pda1.project.user.service.dto.ItemDTO;
 import com.pda1.project.user.service.dto.UserFilterDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.security.Principal;
 import java.util.*;
@@ -65,8 +66,8 @@ public class UserSystemService {
 
         MainInterestResponse response = new MainInterestResponse();
 //        System.out.println(principal.getName());
-
-        if(Objects.isNull(principal)){
+        System.out.println("@@@ " + principal);
+        if (Objects.isNull(principal) || !Objects.nonNull(principal) || ObjectUtils.isEmpty(principal)) {
             List<ItemDTO> itemDTOS = new ArrayList<>();
 
             List<ItemValue> itemValues = itemValueRepository.findAll();
@@ -85,13 +86,14 @@ public class UserSystemService {
 
             response.getResponse().add(interestList);
 
-        }
-        else{
-            UserInformation user = userInformationRepository.findByAccount(principal.getName()).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 회원입니다."));
+        } else {
+
+
+            UserInformation user = userInformationRepository.findByAccount(principal.getName()).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
             List<InterestItem> items = interestItemRepository.findAllByUserInformation(user);
 
-            for(InterestItem item : items){
+            for (InterestItem item : items) {
 
                 List<ItemDTO> itemDTOS = new ArrayList<>();
 
@@ -110,11 +112,13 @@ public class UserSystemService {
                         .build();
 
                 response.getResponse().add(interestList);
-        }
+            }
+
+
 
         }
-
         return response;
+
     }
 
     public MainDetailResponse getDetailInformation(String stockCode) {
