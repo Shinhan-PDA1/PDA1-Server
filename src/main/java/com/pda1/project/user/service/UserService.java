@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -70,8 +67,8 @@ public class UserService {
 
     public String getType(UserInformation user) {
 
-        Survey survey = surveyRepository.findByUserInformation(user).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 설문입니다."));
-
+        Survey survey = surveyRepository.findByUserInformation(user).orElse(null);
+        if(Objects.isNull(survey)) return null;
         return survey.getInvestPeriod();
     }
 
