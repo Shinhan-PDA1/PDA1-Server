@@ -64,7 +64,7 @@ public class UserSystemService {
     public MainInterestResponse getInterestItems(Principal principal) {
 
         MainInterestResponse response = new MainInterestResponse();
-        System.out.println(principal.getName());
+//        System.out.println(principal.getName());
 
         if(Objects.isNull(principal)){
             List<ItemDTO> itemDTOS = new ArrayList<>();
@@ -86,33 +86,33 @@ public class UserSystemService {
             response.getResponse().add(interestList);
 
         }
+        else{
+            UserInformation user = userInformationRepository.findByAccount(principal.getName()).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
+            List<InterestItem> items = interestItemRepository.findAllByUserInformation(user);
 
-        UserInformation user = userInformationRepository.findByAccount(principal.getName()).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 회원입니다."));
+            for(InterestItem item : items){
 
-        List<InterestItem> items = interestItemRepository.findAllByUserInformation(user);
+                List<ItemDTO> itemDTOS = new ArrayList<>();
 
-        for(InterestItem item : items){
+                List<ItemValue> itemValues = itemValueRepository.findAllByItem(item.getItem());
+                itemValues.stream().forEach(data -> itemDTOS.add(ItemDTO.builder()
+                        .item_name(data.getItemName())
+                        .change_number(data.getChangeNumber())
+                        .change_rate(data.getChangeRate())
+                        .curr_price(data.getCurrPrice())
+                        .stock_code(data.getStockCode())
+                        .build()));
 
-            List<ItemDTO> itemDTOS = new ArrayList<>();
+                InterestList interestList = InterestList.builder()
+                        .theme(item.getItem().getTheme())
+                        .items(itemDTOS)
+                        .build();
 
-            List<ItemValue> itemValues = itemValueRepository.findAllByItem(item.getItem());
-            itemValues.stream().forEach(data -> itemDTOS.add(ItemDTO.builder()
-                                                                    .item_name(data.getItemName())
-                                                                    .change_number(data.getChangeNumber())
-                                                                    .change_rate(data.getChangeRate())
-                                                                    .curr_price(data.getCurrPrice())
-                                                                    .stock_code(data.getStockCode())
-                                                                    .build()));
-
-            InterestList interestList = InterestList.builder()
-                            .theme(item.getItem().getTheme())
-                                    .items(itemDTOS)
-                                            .build();
-
-            response.getResponse().add(interestList);
+                response.getResponse().add(interestList);
         }
 
+        }
 
         return response;
     }
