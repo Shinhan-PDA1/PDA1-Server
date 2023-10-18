@@ -2,6 +2,7 @@ package com.pda1.project.user.service;
 
 import com.pda1.project.domain.UserInformation.UserInformation;
 import com.pda1.project.domain.UserInformation.UserInformationRepository;
+import com.pda1.project.domain.survey.SurveyRepository;
 import com.pda1.project.user.service.dto.UserRegisterDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +18,7 @@ public class UserService {
 
     private final UserInformationRepository userInformationRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SurveyRepository surveyRepository;
 
     public Map<String, Object> create(UserRegisterDTO dto) {
         Map<String, Object> resultMap = new HashMap<>();
@@ -52,5 +54,12 @@ public class UserService {
 
     public UserInformation findUser(String account) {
         return userInformationRepository.findByAccount(account).orElseThrow();
+    }
+
+    public Boolean validSurvey(UserInformation user) {
+
+        if(surveyRepository.findByUserInformation(user).isPresent()) return true;
+        else return false;
+
     }
 }

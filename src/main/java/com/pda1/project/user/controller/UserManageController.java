@@ -76,7 +76,9 @@ public class UserManageController {
         final String token = jwtUtils.createToken(userDetails.getUsername(), foundUser.getRoles());
         final UserInformation user = userInformationDetailService.getUserInformation(account);
 
-        return ResponseEntity.ok(new AuthenticationResponse(token, user));
+        Boolean isSurvey = userService.validSurvey(foundUser);
+
+        return ResponseEntity.ok(new AuthenticationResponse(token, isSurvey, user));
     }
 
     @PostMapping("/logout")

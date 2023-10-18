@@ -6,10 +6,12 @@ import lombok.Getter;
 @Getter
 public class AuthenticationResponse {
     private final String jwt;
+    private final Boolean isSurvey;
     private final UserInformation userInformation;
 
-    public AuthenticationResponse(String jwt, UserInformation userInformation) {
+    public AuthenticationResponse(String jwt, Boolean isSurvey, UserInformation userInformation) {
         this.jwt = jwt;
+        this.isSurvey = isSurvey;
         this.userInformation = userInformation;
     }
 }
