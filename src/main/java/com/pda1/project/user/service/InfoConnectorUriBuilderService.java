@@ -11,10 +11,10 @@ import java.net.URI;
 @Service
 @RequiredArgsConstructor
 public class InfoConnectorUriBuilderService {
-    private static final String DETAIL_INFO_URL =  "jootopia-infoConnector-service.team-1.svc.cluster.local/api/v1/zootopia/detail";
-    private static final String CHATBOT_URL =  "jootopia-infoConnector-service.team-1.svc.cluster.local/api/v1/openai/chatbot";
-    private static final String GUIDE_URL =  "jootopia-infoConnector-service.team-1.svc.cluster.local/api/v1/zootopia/guide";
-    private static final String STOCK_CODE_URL =  "jootopia-infoConnector-service.team-1.svc.cluster.local/api/v1/zootopia/search";
+    private static final String DETAIL_INFO_URL =  "jootopia-infoconnector-service.team-1.svc.cluster.local/api/v1/zootopia/detail";
+    private static final String CHATBOT_URL =  "jootopia-infoconnector-service.team-1.svc.cluster.local/api/v1/openai/chatbot";
+    private static final String GUIDE_URL =  "jootopia-infoconnector-service.team-1.svc.cluster.local/api/v1/zootopia/guide";
+    private static final String STOCK_CODE_URL =  "jootopia-infoconnector-service.team-1.svc.cluster.local/api/v1/zootopia/search";
 
 
     public URI buildDetailUri(String stockCode) {
