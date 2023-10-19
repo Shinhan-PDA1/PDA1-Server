@@ -24,7 +24,7 @@ spec:
                       - ng-1
       containers:
         - name: jootopia-mainserver-app
-          image: 686710509719.dkr.ecr.ap-northeast-2.amazonaws.com/team-1:20231019112846 #
+          image: 686710509719.dkr.ecr.ap-northeast-2.amazonaws.com/team-1:20231020003052 #
           imagePullPolicy: IfNotPresent
           resources:
             requests:

@@ -20,6 +20,7 @@ import java.util.Objects;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/jootopia/v1/users/system")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserSystemController {
 
     private final UserSystemService userSystemService;
