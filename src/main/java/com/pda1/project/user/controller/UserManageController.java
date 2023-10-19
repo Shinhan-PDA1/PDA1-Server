@@ -73,11 +73,7 @@ public class UserManageController {
         final String token = jwtUtils.createToken(userDetails.getUsername(), foundUser.getRoles());
         final UserInformation user = userInformationDetailService.getUserInformation(account);
 
-        String type = userService.getType(foundUser);
-        List<InterestItem> items = userService.getInterestItem(foundUser);
-        Interest interest = Interest.builder().item1(items.get(0).getItem().getTheme()).item2(items.get(1).getItem().getTheme()).item3(items.get(2).getItem().getTheme()).build();
-
-        return ResponseEntity.ok(new AuthenticationResponse(token, type, interest, user));
+        return ResponseEntity.ok(new AuthenticationResponse(token, user));
     }
 
     @PostMapping("/logout")

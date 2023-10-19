@@ -59,6 +59,7 @@ public class UserSystemController {
 
     @GetMapping("/search")
     public ResponseEntity<?> getStockCode(@RequestParam String query) {
+        System.out.println("@@@@ " + query);
         String code = userSystemService.getStockCode(query);
         return ResponseEntity.ok(code);
     }
